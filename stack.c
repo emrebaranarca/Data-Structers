@@ -17,6 +17,11 @@ struct stack* createStack(int capasity)
 }
 void destroyStack(struct stack** stack)
 {
+    free((*stack)->array);
+    free(*stack);
+    *stack=NULL;
+    
+    
     
 }
 void increasingCapasity(struct stack** stack,int newcapasity)
@@ -25,7 +30,7 @@ void increasingCapasity(struct stack** stack,int newcapasity)
 }
 void pushStack(struct stack** stack,int data)
 {
-    if(stack==NULL || (*stack)->top == ((*stack)->capasity)-1) return ;
+    if(stack==NULL || (*stack)->top == ((*stack)->capasity)-1) return ;  //overflow
 
     (*stack)->array[(++(*stack)->top)]=data;
     
@@ -33,9 +38,9 @@ void pushStack(struct stack** stack,int data)
 
 void popStack(struct stack** stack)
 {
-    if(stack==NULL || (*stack)->top==-1) return;
+    if(stack==NULL || (*stack)->top==-1) return;  //underflow
 
-    return (*stack)->array[(*stack)->top--];
+    (*stack)->array[(*stack)->top--];
 
 }
 
@@ -47,12 +52,14 @@ int topStack(struct stack* stack)
 char isEmpty(struct stack* stack)
 {
     if(stack->top==-1) return '1';
+    else if(stack==NULL) return '1';
     else return '0';
 }
 
 char isFull(struct stack* stack)
 {
     if(stack->top+1==stack->capasity) return '1';
+    else if(stack==NULL) return '0';
     else return '0';
 
 }
@@ -63,6 +70,7 @@ void printStack(struct stack* stack)
     {
         printf("|%d|- ",stack->array[i]);
     }
+    
     
 }
 
@@ -82,7 +90,7 @@ int main(int argc, char const *argv[])
     pushStack(&stack_1,420);
 
     
-   
+    destroyStack(&stack_1);
     printStack(stack_1);
     printf("top element of stack :%d\n",topStack(stack_1));
     printf("is full:%c",isFull(stack_1));
@@ -93,13 +101,24 @@ int main(int argc, char const *argv[])
 
     printf("\n");
     
-    destroyStack(&stack_1);
+    
     
     printStack(stack_1);
     printf("top element of stack :%d\n",topStack(stack_1));
     
     printf("is empty:%c",isEmpty(stack_1));
     printf("\nis full:%c",isFull(stack_1));
+    printf("\n""");
+
+
+
+    
+
+    
+
+
+
+
 
 
     
