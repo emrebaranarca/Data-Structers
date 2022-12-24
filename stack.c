@@ -90,7 +90,7 @@ int main(int argc, char const *argv[])
     pushStack(&stack_1,420);
 
     
-    destroyStack(&stack_1);
+    //destroyStack(&stack_1);
     printStack(stack_1);
     printf("top element of stack :%d\n",topStack(stack_1));
     printf("is full:%c",isFull(stack_1));
