@@ -28,19 +28,19 @@ void insertionMiddleListMinMax(int data,struct node** head)
     struct node* temp=*head;
     struct node* temp2;
 
-    while(temp != NULL && temp->data <= data) //küçükten büyüğe gidiyor nerde durayım ?
+    while(temp != NULL && temp->data <= data) 
     {
         if(temp->data == data) return ;
         temp2=temp;
         temp=temp->next;
     }
-    if(temp==*head) //eleman var mı ?
+    if(temp==*head) 
     {
         nd->next=*head;
         *head=nd;
     }
 
-    else    // yerlerine yerleştiriyor.
+    else    
     {
         temp2->next=nd;
         nd->next=temp;
@@ -92,7 +92,7 @@ void insertionMiddleListPosition(int position,int data,struct node** head)
         }
 
     }
-    if(temp==*head) //eleman var mı ?
+    if(temp==*head) 
     {
         nd->next=*head;
         *head=nd;
