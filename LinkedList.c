@@ -154,18 +154,63 @@ void printLinkedList(struct node* nd)
 
     }
 }
+void divideListOddEvenNumber(struct node **head1,struct node** head2)
+{
+    struct node* current=*head1;
+    struct node* current2=*head2;
+    struct node* temp=current;
 
+    if(current->data % 2 ==1)
+    {
+        current2->data=current->data;
+        current=current->next;
+        current2->next=NULL;
+        current2=current2->next;
+    }
+    else
+    {
+        temp->data=current->data;
+        temp->next=NULL;
+        temp=temp->next;
+        current=current->next;
+    }
+
+}
 
 int main(int argc, char const *argv[])
 {
-    struct node *head=NULL;
-    insertionHeadList(10,&head);
-    insertionHeadList(20,&head);
-    insertionEndList(30,&head);
+    // struct node *head=NULL;
+    // insertionHeadList(10,&head);
+    // insertionHeadList(20,&head);
+    // insertionEndList(30,&head);
 
-    deleteData(20,&head);
+    // deleteData(20,&head);
 
-    printLinkedList(head);
+    //printLinkedList(head);
+
+
+    struct node *head1=NULL;
+    struct node *head2=NULL;
+
+    insertionHeadList(5,&head1);
+    insertionHeadList(4,&head1);
+    insertionHeadList(3,&head1);
+    insertionHeadList(2,&head1);
+    insertionHeadList(1,&head1);
+
+    insertionHeadList(15,&head2);
+    insertionEndList(30,&head2);
+    deleteData(15,&head2);
+    deleteData(30,&head2);
+    //deleteData(15,head2);
+
+    //divideListOddEvenNumber(&head1,&head2);
+    //printf("test");
+
+    printLinkedList(head2);
+
+
+
 
     
     return 0;
