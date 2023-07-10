@@ -36,7 +36,7 @@ void createHashTable(int size,int mul,struct hashtable** table)
 
 void insertionKeyHashTable(struct hashtable* tab,char* key)
 {       
-     int position=hash(key,tab->multiplier,tab->tablesize);
+     int position=Hash(key,tab->multiplier,tab->tablesize);
     if(insertionList(&((tab->headtable +position)->header),key))
     {
         (tab->headtable +position)->count++;
@@ -65,7 +65,7 @@ void printList(struct node* nd)
 {   
     if(nd!=NULL)
     {
-        printf("%c ",nd->key);
+        printf("%s ",nd->key);
         printList(nd->next);
     }
 
@@ -73,13 +73,13 @@ void printList(struct node* nd)
 
 void printHashTable(struct hashtable* tab)
 {
-    if(tab!=NULL)
+    if(tab)
     {
         printf("*****HASH TABLE*****\n");
         for(int i=0;i<tab->tablesize;i++)
         {
             printf("pos : %d (%d)",i,tab->headtable[i].count);
-            printList(tab->headtable[i].header);
+            printList((tab->headtable+i)->header);
             printf("\n");
         }
     }
@@ -87,10 +87,10 @@ void printHashTable(struct hashtable* tab)
        printf("empty");
 }
 
-int hash(char *key,int mul,int size)
+int Hash(char *key,int mul,int size)
 {
     int i=0;
-     int pos=0;
+    int pos=0;
     while(key[i])
     {
         pos=(key[i]+mul*pos)%size;
@@ -98,6 +98,19 @@ int hash(char *key,int mul,int size)
     }
     return pos;
 }
+
+// int isEqual(struct hashtable* tab1,struct hashtable* tab2)
+// {
+//     for(int i=0;i<tab1->tablesize;i++)
+//     {
+//         if(strcmp(tab1->headtable[i].header->key,tab2->headtable[i].header->key))
+//         {
+
+//         }
+        
+        
+//     }
+// }
 
 
 
@@ -111,10 +124,21 @@ int main(int argc, char const *argv[])
     printf("test\n");
     printHashTable(table);
     printf("test\n");
-    insertionKeyHashTable(table,"anıl");
-    printf("test\n");
-    printHashTable(table);
+     insertionKeyHashTable(table,"anil");
+     insertionKeyHashTable(table,"emre");
+     printHashTable(table);
     
+    struct hashtable* table2=NULL;
+    createHashTable(7,5,&table2);
+    insertionKeyHashTable(table2,"anil");
+    insertionKeyHashTable(table2,"emre");
+
+    printf("\nhashtable 2\n");
+    printHashTable(table2);
+
+
+    //int same=isEqual();
+
     
     return 0;
 }
